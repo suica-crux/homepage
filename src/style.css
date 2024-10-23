@@ -1,4 +1,60 @@
-:root {
-  --bs-primary: #d396ed;
-  /* --bs-secondary: #; */
+/* Copyright (c) 2023 Vipelar. All Rights Reserved. */
+a {
+  text-decoration: none;
+}
+
+.navbar {
+  background-color: #333;
+}
+
+.navbar-dark .navbar-toggler-icon {
+  background-color: #fff;
+}
+
+.navbar-dark .navbar-toggler {
+  border-color: #fff;
+}
+
+.navbar-dark .navbar-toggler:hover {
+  background-color: #555;
+}
+
+.navbar-nav .nav-link {
+  color: #fff;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #aaa;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 0;
+  background-image: url('img/vipelar.png'); /* 背景画像のパスを設定 */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+  background-color: #000; /* 背景色に透明度を設定 */
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.fixed-top-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #333;
+  z-index: 1000;
+}
+
+.container {
+  width: 100%;
+  padding-top: 25px;
 }
