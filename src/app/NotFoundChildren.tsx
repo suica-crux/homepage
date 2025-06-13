@@ -32,7 +32,7 @@ export default function NotFoundChildren() {
         <Heading
           warn={true}
           title="404"
-          subtitle="指定されたページは広大な宇宙のどこを探してもありませんでした。URLを確認してください。"
+          subtitle="指定されたページはありませんでした。URLを確認してください。"
         />
         <Text colour="gray" className="mt-4">
           URLの送信者または
@@ -41,7 +41,7 @@ export default function NotFoundChildren() {
           </Link>
           ください。
         </Text>
-        <Text>{countdown}&nbsp;秒後にトップーページに帰還します</Text>
+        <Text>{countdown}&nbsp;秒後にトップーページに戻ります</Text>
         <Text>
           自動で戻らない場合:
           <Link
