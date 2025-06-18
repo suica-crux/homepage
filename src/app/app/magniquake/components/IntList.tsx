@@ -14,7 +14,7 @@ export default function IntList({ prefs }: { prefs: Pref[] }) {
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <InfoBox title='各地の震度'>
+    <InfoBox title="各地の震度">
       {intOrder
         .filter((int) => grouped[int]) // 存在する震度だけ
         .filter((int) => showAll || int === maxInt) // 最大震度だけ or 全部
@@ -24,9 +24,9 @@ export default function IntList({ prefs }: { prefs: Pref[] }) {
 
       {/* 🧩 トグルボタン */}
       {!showAll && (
-        <div className='mt-4 text-center'>
+        <div className="mt-4 text-center">
           <button
-            className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 content-right'
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 content-right"
             onClick={() => setShowAll(true)}
           >
             他の地域も表示

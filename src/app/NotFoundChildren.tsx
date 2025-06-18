@@ -34,7 +34,7 @@ export default function NotFoundChildren() {
           title="404"
           subtitle="指定されたページはありませんでした。URLを確認してください。"
         />
-        <Text colour="gray" className="mt-4">
+        <Text color="gray" className="mt-4">
           URLの送信者または
           <Link href="/contact" className="text-blue-500 hover:text-blue-700">
             管理者に問い合わせて
@@ -44,10 +44,7 @@ export default function NotFoundChildren() {
         <Text>{countdown}&nbsp;秒後にトップーページに戻ります</Text>
         <Text>
           自動で戻らない場合:
-          <Link
-            href="/"
-            className="inline-block mt-2 text-blue-500 hover:text-blue-700"
-          >
+          <Link href="/" className="inline-block mt-2 text-blue-500 hover:text-blue-700">
             &nbsp;トップページに戻る
           </Link>
         </Text>

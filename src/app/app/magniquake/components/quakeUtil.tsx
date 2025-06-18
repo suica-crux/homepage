@@ -9,7 +9,7 @@ export function formatDateTime(dateString: string | Date) {
   const hour = date.getHours();
   const minute = date.getMinutes();
 
-  return `${year}年${month}月${day}日 ${hour}時${minute.toString().padStart(2, '0')}分`
+  return `${year}年${month}月${day}日 ${hour}時${minute.toString().padStart(2, '0')}分`;
 }
 
 // 現在時刻生成
@@ -19,19 +19,11 @@ export function nowJSTTime() {
 }
 
 // Reactコンポーネント
-export function InfoBox({
-  title,
-  children,
-}: {
-  title: string;
-  children: ReactNode;
-}) {
+export function InfoBox({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div>
       <p>{title}</p>
-      <div className="bg-gray-100 border-gray-300 border-2 p-4 rounded-lg">
-        {children}
-      </div>
+      <div className="bg-gray-100 border-gray-300 border-2 p-4 rounded-lg">{children}</div>
     </div>
   );
 }
