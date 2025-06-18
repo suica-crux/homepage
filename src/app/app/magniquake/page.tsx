@@ -3,9 +3,10 @@
 import IntList from './components/IntList';
 import { Head, Body } from './components/Display';
 import { useEffect, useState } from 'react';
+import type { Data } from './components/types.ts';
 
 export default function MagniQuakePage() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<Data | null>(null);
 
   useEffect(() => {
     fetch('https://dev.narikakun.net/webapi/earthquake/post_data.json')
@@ -14,10 +15,10 @@ export default function MagniQuakePage() {
       .catch((err) => {
         console.error('データ取得に失敗:', err);
       });
-  }, [])
+  }, []);
 
   if (!data) {
-    return <p>読み込み中...</p>
+    return <p>読み込み中...</p>;
   }
 
   const headData = data.Head;

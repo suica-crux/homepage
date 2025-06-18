@@ -6,17 +6,17 @@ import React from 'react';
 
 export default function ExternalLink({
   href,
-  customClass,
+  className,
   children,
 }: {
   href: string;
-  customClass: string;
+  className: string;
   children: React.ReactNode;
 }) {
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-1 ${customClass}`}
+      className={`inline-flex items-center gap-1 ${className}`}
       target="_blank"
       rel="noopener noreferrer"
     >

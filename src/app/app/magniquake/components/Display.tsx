@@ -1,23 +1,25 @@
-'use client'
+'use client';
 
-import { InfoBox } from "./quakeUtil";
-import type { Head } from "./types";
-import { formatDateTime, nowJSTTime } from "./quakeUtil";
+import { InfoBox } from './quakeUtil';
+import type { Head, Body } from './types';
+import { formatDateTime } from './quakeUtil';
 import { useState, useEffect } from 'react';
 
 export function Head({ data }: { data: Head }) {
   return (
-    <h1><span className="text-xl">{data.Title}</span></h1>
+    <h1>
+      <span className="text-xl">{data.Title}</span>
+    </h1>
   );
 }
 
-export function Body({ data }: { data: any }) {
+export function Body({ data }: { data: Body }) {
   const [timeStr, setTimeStr] = useState('');
   useEffect(() => {
     const now = new Date();
     const formattedNow = formatDateTime(now);
     setTimeStr(formattedNow);
-  }, [])
+  }, []);
   return (
     <div>
       <InfoBox title="更新日時">{timeStr}</InfoBox>
@@ -26,5 +28,5 @@ export function Body({ data }: { data: any }) {
       <InfoBox title="震源の深さ">{data.Earthquake.Hypocenter.Depth}</InfoBox>
       <InfoBox title="マグニチュード">M{data.Earthquake.Magnitude}</InfoBox>
     </div>
-  )
+  );
 }
