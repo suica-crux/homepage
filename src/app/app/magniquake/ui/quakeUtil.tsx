@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import type { Pref } from './types';
 
 // 日時フォーマット
 export function formatDateTime(dateString: string | Date) {
@@ -26,4 +27,26 @@ export function InfoBox({ title, children }: { title: string; children: ReactNod
       <div className="bg-gray-100 border-gray-300 border-2 p-4 rounded-lg">{children}</div>
     </div>
   );
+}
+
+// データ処理
+export function groupByInt(prefs: Pref[]) {
+  const result: Record<string, Record<string, string[]>> = {};
+
+  prefs.forEach((pref) => {
+    const prefName = pref.Name;
+
+    pref.Area.forEach((area) => {
+      area.City.forEach((city) => {
+        const int = city.MaxInt;
+
+        if (!result[int]) result[int] = {};
+        if (!result[int][prefName]) result[int][prefName] = [];
+
+        result[int][prefName].push(city.Name);
+      });
+    });
+  });
+
+  return result;
 }
