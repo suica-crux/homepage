@@ -16,7 +16,7 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex space-x-6">
-          <Link href="/app/magniquake" className="hover:text-blue-700">
+          <Link href="/magniquake" className="hover:text-blue-700">
             Magniquake
           </Link>
           <Link href="/contact" className="hover:text-blue-700">
@@ -38,7 +38,7 @@ export default function Header() {
       {isOpen && (
         <nav className="md:hidden bg-white shadow-md absolute top-16 left-0 w-full py-2">
           <Link
-            href="/app/magniquake"
+            href="/magniquake"
             className="block px-4 py-2 hover:bg-gray-100"
             onClick={() => setIsOpen(false)}
           >
