@@ -1,9 +1,8 @@
 'use client';
 
-import IntList from './components/IntList';
-import { Head, Body } from './components/Display';
+import { Head, Body, IntList } from './ui/Display';
 import { useEffect, useState } from 'react';
-import type { Data } from './components/types.ts';
+import type { Data } from './ui/types';
 
 export default function MagniQuakePage() {
   const [data, setData] = useState<Data | null>(null);
