@@ -25,7 +25,7 @@
     "depcheck": "^1.4.7",
     "eslint": "^9.29.0",
     "eslint-config-next": "15.3.4",
-    "prettier": "^3.6.1",
+    "prettier": "^3.6.2",
     "tailwindcss": "^4",
     "ts-prune": "^0.10.3",
     "typescript": "^5"
