@@ -1,20 +1,12 @@
 'use client';
 
-import { Head, Body, IntList } from './ui/Display';
-import { useEffect, useState } from 'react';
-import type { Data } from './ui/types';
+import { Head, Body, IntList } from './components/Display';
+import { GetPostData } from './components/getData';
+import Link from 'next/link';
+import { ExternalLinkIcon } from 'lucide-react';
 
 export default function MagniQuakePage() {
-  const [data, setData] = useState<Data | null>(null);
-
-  useEffect(() => {
-    fetch('https://dev.narikakun.net/webapi/earthquake/post_data.json')
-      .then((res) => res.json())
-      .then((json) => setData(json))
-      .catch((err) => {
-        console.error('データ取得に失敗:', err);
-      });
-  }, []);
+  const data = GetPostData();
 
   if (!data) {
     return <p>読み込み中...</p>;
@@ -22,7 +14,6 @@ export default function MagniQuakePage() {
 
   const headData = data.Head;
   const bodyData = data.Body;
-  const intListData = bodyData.Intensity.Observation.Pref;
 
   return (
     <div>
@@ -30,7 +21,17 @@ export default function MagniQuakePage() {
       <div className="font-bold bg-gray-200 p-4 shadow rounded-lg overflow-hidden hover:shadow-md transition-shadow space-y-4 mb-4">
         <Head data={headData} />
         <Body data={bodyData} />
-        <IntList prefs={intListData} />
+        <IntList data={data} />
+      </div>
+      <div className="text-center">
+        <Link
+          href="https://ntool.online/apidoc/earthquakeapi"
+          className="underline inline-flex items-center gap-1"
+          target="_blank"
+        >
+          API
+          <ExternalLinkIcon className="w-4 h-4" />
+        </Link>
       </div>
     </div>
   );
