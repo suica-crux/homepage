@@ -12,17 +12,16 @@ export function IntList({ data }: { data: Data }) {
   const needShowAll = Object.keys(grouped).length > 1;
 
   const [showAll, setShowAll] = useState(false);
-  
-  
+
   return (
     <InfoBox title="各地の震度">
       {intOrder
         .filter((int) => grouped[int])
         .filter((int) => showAll || int === maxInt)
-        .map((int) => 
-        {  const g = grouped[int]
-          if (!g) return null
-          return <IntBlock key={int} int={int} data={g} />
+        .map((int) => {
+          const g = grouped[int];
+          if (!g) return null;
+          return <IntBlock key={int} int={int} data={g} />;
         })}
 
       {!showAll && needShowAll && (
