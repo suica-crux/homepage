@@ -18,9 +18,11 @@ export function IntList({ data }: { data: Data }) {
       {intOrder
         .filter((int) => grouped[int])
         .filter((int) => showAll || int === maxInt)
-        .map((int) => (
-          <IntBlock key={int} int={int} data={grouped[int]} />
-        ))}
+        .map((int) => {
+          const g = grouped[int];
+          if (!g) return null;
+          return <IntBlock key={int} int={int} data={g} />;
+        })}
 
       {!showAll && needShowAll && (
         <div className="mt-4 text-center">

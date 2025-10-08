@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import NotFoundChildren from './NotFoundChildren';
 
 export const metadata: Metadata = {
