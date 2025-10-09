@@ -1,8 +1,4 @@
-import {
-  InformationCircleIcon,
-  ExclamationTriangleIcon,
-  XCircleIcon,
-} from '@heroicons/react/24/solid';
+import { Info, AlertTriangle, XCircle } from 'lucide-react';
 
 interface AlertProps {
   type?: 'info' | 'warn' | 'caution';
@@ -13,25 +9,27 @@ export default function Alert({ children, type = 'info' }: AlertProps) {
   let borderColor = 'border-blue-500';
   let bgColor = 'bg-blue-100';
   let textColor = 'text-blue-800';
-  let Icon = InformationCircleIcon;
+  let size = 'h-6 w-6';
+  let Icon = Info;
 
   if (type === 'warn') {
     borderColor = 'border-yellow-500';
     bgColor = 'bg-yellow-100';
     textColor = 'text-yellow-800';
-    Icon = ExclamationTriangleIcon;
+    size = 'h-9 w-9';
+    Icon = XCircle;
   } else if (type === 'caution') {
     borderColor = 'border-red-500';
     bgColor = 'bg-red-100';
     textColor = 'text-red-800';
-    Icon = XCircleIcon;
+    Icon = AlertTriangle;
   }
 
   return (
     <div
       className={`flex items-start gap-3 border ${borderColor} ${bgColor} ${textColor} p-4 my-4 rounded-lg`}
     >
-      <Icon className={`w-6 h-6 mt-1 shrink-0 ${textColor}`} />
+      <Icon className={`mt-1 shrink-0 ${size} ${textColor}`} />
       <p>{children}</p>
     </div>
   );
