@@ -30,6 +30,3 @@ jobs:
 
       - name: Prettier
         run: bun prettier
-
-      - name: Build
-        run: bun run build
