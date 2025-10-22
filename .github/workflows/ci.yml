@@ -1,4 +1,4 @@
-name: build-and-link
+name: lint
 
 on:
   push:
@@ -30,6 +30,3 @@ jobs:
 
       - name: Prettier
         run: bun prettier
-
-      - name: Build
-        run: bun run build
