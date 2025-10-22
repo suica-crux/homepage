@@ -1,4 +1,4 @@
-name: build-and-link
+name: lint
 
 on:
   push:
