@@ -9,9 +9,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const links: { href: string; label: string }[] = [
-    { href: '/magniquake', label: 'Magniquake' },
-  ];
+  const links: { href: string; label: string }[] = [{ href: '/magniquake', label: 'Magniquake' }];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,10 +33,10 @@ export default function Header() {
     <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
       <div className="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
         <div className="flex gap-x-2 items-center">
-        <Image src="/favicon.ico" width={40} height={40} alt="logo" className="rounded" />
-        <Link href="/" className="text-xl font-bold">
-          <span className="text-xl font-bold">Vipelar</span>
-        </Link>
+          <Image src="/favicon.ico" width={40} height={40} alt="logo" className="rounded" />
+          <Link href="/" className="text-xl font-bold">
+            <span className="text-xl font-bold">Vipelar</span>
+          </Link>
         </div>
 
         <nav className="hidden space-x-6 md:flex">
