@@ -1,6 +1,6 @@
 import { Info, AlertTriangle, XCircle } from 'lucide-react';
 
-interface AlertProps {
+type AlertProps = {
   type?: 'info' | 'warn' | 'caution';
   children: React.ReactNode;
 }
