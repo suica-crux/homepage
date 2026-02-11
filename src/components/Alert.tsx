@@ -3,7 +3,7 @@ import { Info, AlertTriangle, XCircle } from 'lucide-react';
 type AlertProps = {
   type?: 'info' | 'warn' | 'caution';
   children: React.ReactNode;
-}
+};
 
 export default function Alert({ children, type = 'info' }: AlertProps) {
   let borderColor = 'border-blue-500';
