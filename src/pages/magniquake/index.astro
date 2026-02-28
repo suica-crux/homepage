@@ -1,0 +1,35 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { Head, Body, IntList } from './lib/Display';
+import { GetPostData } from './lib/getData';
+import { ExternalLinkIcon } from 'lucide-react';
+
+const data = await GetPostData();
+---
+
+<Layout title="Magniquake">
+  {
+    data ? (
+      <>
+        <h1 class="text-4xl font-bold mb-4">Magniquake</h1>
+        <div class="font-bold bg-gray-200 p-4 shadow rounded-lg overflow-hidden hover:shadow-md transition-shadow space-y-4 mb-4">
+          <Head data={data.Head} />
+          <Body data={data.Body} client:load />
+          <IntList data={data} client:load />
+        </div>
+        <div class="text-center">
+          <a
+            href="https://ntool.online/apidoc/earthquakeapi"
+            class="underline inline-flex items-center gap-1"
+            target="_blank"
+          >
+            API
+            <ExternalLinkIcon className="w-4 h-4" />
+          </a>
+        </div>
+      </>
+    ) : (
+      <p>データ取得に失敗しました</p>
+    )
+  }
+</Layout>

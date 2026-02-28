@@ -15,14 +15,16 @@ export function IntList({ data }: { data: Data }) {
 
   return (
     <InfoBox title="各地の震度">
-      {intOrder
-        .filter((int) => grouped[int])
-        .filter((int) => showAll || int === maxInt)
-        .map((int) => {
-          const g = grouped[int];
-          if (!g) return null;
-          return <IntBlock key={int} int={int} data={g} />;
-        })}
+      <div className="space-y-4">
+        {intOrder
+          .filter((int) => grouped[int])
+          .filter((int) => showAll || int === maxInt)
+          .map((int) => {
+            const g = grouped[int];
+            if (!g) return null;
+            return <IntBlock key={int} int={int} data={g} />;
+          })}
+      </div>
 
       {!showAll && needShowAll && (
         <div className="mt-4 text-center">
