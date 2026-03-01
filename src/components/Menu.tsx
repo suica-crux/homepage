@@ -31,8 +31,11 @@ export default function Menu({ links }: { links: Link[] }) {
   return (
     <>
       <button
-        className="p-4 -m-2 border rounded-md md:hidden"
-        onClick={() => setIsOpen(!isOpen)}
+        className="p-4 -m-2 rounded-md md:hidden"
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
         aria-label="Toggle Menu"
       >
         {isOpen ? <X size={24} /> : <MenuIcon size={24} />}

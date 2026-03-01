@@ -12,7 +12,15 @@ const { title, description, href, img } = Astro.props;
 
 <div class="w-full md:w-1/3 mb-4 px-2">
   <a href={href} class="block">
-    <div class="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+    <div
+      class="/* 基本の見た目 */
+  bg-white shadow rounded-lg overflow-hidden
+  /* アニメーション設定...らしい */
+  ring-2 ring-transparent
+  transition-all duration-200 ease-in-out
+  /* ホバー時に色を付ける */
+  hover:ring-vipelar hover:shadow-lg"
+    >
       {
         img ? (
           <Image
