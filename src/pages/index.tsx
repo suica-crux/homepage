@@ -4,7 +4,7 @@ import Card from '@/components/Card';
 
 const HomePage: React.FC = () => {
   return (
-    <Layout>
+    <Layout title="Home">
       <section className="mb-16 text-center sm:text-left">
         <h1 className="text-4xl sm:text-5xl font-extrabold mb-6 tracking-tight">
           Vipelarのおもちゃ箱

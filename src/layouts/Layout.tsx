@@ -5,11 +5,18 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import '@/styles/global.css';
 
+import { useEffect } from 'react';
+
 interface LayoutProps {
   children: React.ReactNode;
+  title?: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, title = 'Vipelar' }) => {
+  useEffect(() => {
+    document.title = title === 'Vipelar' ? title : `${title} | Vipelar`;
+  }, [title]);
+
   return (
     <div className="antialiased min-h-screen">
       <div className="fixed inset-0 -z-10 pointer-events-none" aria-hidden="true">
