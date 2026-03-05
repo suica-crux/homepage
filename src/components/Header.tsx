@@ -16,16 +16,18 @@ const Header: React.FC = () => {
           </Link>
         </div>
 
-        <nav className="hidden space-x-6 md:flex">
-          {links.map(({ href, label }) => (
-            <Link key={href} to={href} className="inline-flex items-center text-main-text hover:text-accent transition-colors font-medium">
-              {label}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <Menu links={links} />
+        <div className="flex items-center gap-6">
+          <nav className="hidden space-x-6 md:flex">
+            {links.map(({ href, label }) => (
+              <Link key={href} to={href} className="inline-flex items-center text-main-text hover:text-accent transition-colors font-medium">
+                {label}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Menu links={links} />
+          </div>
         </div>
       </div>
     </header>
