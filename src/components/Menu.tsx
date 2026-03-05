@@ -52,7 +52,7 @@ export default function Menu({ links }: { links: LinkType[] }) {
             <Link 
               key={href} 
               to={href} 
-              className="block px-6 py-3 text-lg text-main-text hover:bg-accent/10 dark:hover:bg-accent/20 hover:text-accent transition-colors"
+              className="block px-6 py-3 text-lg text-main-text transition-colors"
               onClick={() => setIsOpen(false)}
             >
               {label}
