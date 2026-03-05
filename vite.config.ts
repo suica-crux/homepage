@@ -7,6 +7,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   plugins: [react(), tailwindcss(), tsconfigPaths()],
   server: {
-    allowedHosts: ['dev.vipelar.com'],
+    allowedHosts: ['dev.vipelar.com', 'dev2.vipelar.com'],
   },
 });

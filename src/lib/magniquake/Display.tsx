@@ -79,68 +79,63 @@ export function Body({ data }: { data: BodyType }) {
 // 内部の関数たち
 function IntBlock({ int, data }: { int: string; data: Record<string, string[]> }) {
   // 震度階級の判定
-  const isNotable = int === '5-' || int === '5+';
-  const isSevere = int === '6-' || int === '6+';
+  const isFilled = int === '5-' || int === '5+' || int === '6-' || int === '6+' || int === '7';
   const isExtreme = int === '7';
-  const isSevereOrAbove = isSevere || isExtreme;
-  const isImpactful = isNotable || isSevereOrAbove;
 
   // 基本的なスタイル定義
-  const intensityStyleMap: Record<string, { label: string; bg: string; text: string; border: string; invertedBg: string; invertedText: string }> = {
-    '1': { label: '1', bg: 'bg-sky-50 dark:bg-card-bg', text: 'text-sky-700 dark:text-sky-400', border: 'border-sky-200 dark:border-sky-500', invertedBg: '', invertedText: '' },
-    '2': { label: '2', bg: 'bg-lime-50 dark:bg-card-bg', text: 'text-lime-700 dark:text-lime-400', border: 'border-lime-200 dark:border-lime-500', invertedBg: '', invertedText: '' },
-    '3': { label: '3', bg: 'bg-yellow-50 dark:bg-card-bg', text: 'text-yellow-700 dark:text-yellow-400', border: 'border-yellow-200 dark:border-yellow-500', invertedBg: '', invertedText: '' },
-    '4': { label: '4', bg: 'bg-orange-50 dark:bg-card-bg', text: 'text-orange-700 dark:text-orange-400', border: 'border-orange-200 dark:border-orange-500', invertedBg: '', invertedText: '' },
-    '5-': { label: '5弱', bg: 'bg-red-50 dark:bg-card-bg', text: 'text-red-700 dark:text-red-400', border: 'border-red-200 dark:border-red-500', invertedBg: '', invertedText: '' },
-    '5+': { label: '5強', bg: 'bg-red-100 dark:bg-card-bg', text: 'text-red-800 dark:text-red-400', border: 'border-red-300 dark:border-red-600', invertedBg: '', invertedText: '' },
-    '6-': { label: '6弱', bg: '', text: '', border: 'border-fuchsia-600', invertedBg: 'bg-fuchsia-600', invertedText: 'text-white' },
-    '6+': { label: '6強', bg: '', text: '', border: 'border-fuchsia-700', invertedBg: 'bg-fuchsia-700', invertedText: 'text-white' },
-    '7': { label: '7', bg: '', text: '', border: 'border-purple-800', invertedBg: 'bg-purple-800', invertedText: 'text-white' },
+  const intensityStyleMap: Record<string, { label: string; bg: string; text: string; border: string }> = {
+    '1': { label: '1', bg: 'bg-slate-50 dark:bg-card-bg', text: 'text-slate-700 dark:text-slate-400', border: 'border-slate-200 dark:border-slate-500' },
+    '2': { label: '2', bg: 'bg-sky-50 dark:bg-card-bg', text: 'text-sky-700 dark:text-sky-300', border: 'border-sky-100 dark:border-sky-400' },
+    '3': { label: '3', bg: 'bg-blue-50 dark:bg-card-bg', text: 'text-blue-700 dark:text-blue-400', border: 'border-blue-200 dark:border-blue-500' },
+    '4': { label: '4', bg: 'bg-amber-50 dark:bg-card-bg', text: 'text-amber-600 dark:text-amber-300', border: 'border-amber-100 dark:border-amber-400' },
+    '5-': { label: '5弱', bg: 'bg-yellow-600', text: 'text-white', border: 'border-yellow-600' },
+    '5+': { label: '5強', bg: 'bg-orange-600', text: 'text-white', border: 'border-orange-600' },
+    '6-': { label: '6弱', bg: 'bg-red-700', text: 'text-white', border: 'border-red-700' },
+    '6+': { label: '6強', bg: 'bg-rose-800', text: 'text-white', border: 'border-rose-800' },
+    '7': { label: '7', bg: 'bg-gradient-to-br from-purple-950 via-black to-purple-950', text: 'text-white', border: 'border-black' },
   };
 
   const currentStyle = intensityStyleMap[int];
 
   // 震度に応じたグロー（外光）の設定
   const glowStyles: Record<string, string> = {
-    '5-': 'shadow-[0_0_15px_-5px_rgba(239,68,68,0.2)] dark:shadow-[0_0_20px_-5px_rgba(239,68,68,0.1)]',
-    '5+': 'shadow-[0_0_20px_-5px_rgba(220,38,38,0.25)] dark:shadow-[0_0_25px_-5px_rgba(220,38,38,0.15)]',
-    '6-': 'shadow-[0_0_25px_-5px_rgba(192,38,211,0.4)]',
-    '6+': 'shadow-[0_0_30px_-5px_rgba(192,38,211,0.5)]',
-    '7': 'shadow-[0_0_40px_-5px_rgba(126,34,206,0.6)]',
+    '5-': 'shadow-[0_0_15px_-5px_rgba(239,68,68,0.2)]',
+    '5+': 'shadow-[0_0_20px_-5px_rgba(220,38,38,0.3)]',
+    '6-': 'shadow-[0_0_30px_-5px_rgba(220,38,38,0.5)]',
+    '6+': 'shadow-[0_0_40px_-5px_rgba(190,18,60,0.6)]',
+    '7': 'shadow-[0_0_60px_-10px_rgba(88,28,135,0.8),0_0_20px_0_rgba(0,0,0,1)]',
   };
 
   return (
     <div className="relative">
       {/* グローレイヤー (Extremeのみ点滅) */}
-      {isImpactful && (
+      {isFilled && (
         <div className={`absolute inset-0 rounded-xl ${glowStyles[int]} ${isExtreme ? 'animate-glow-pulse' : ''} pointer-events-none`} />
       )}
       
       {/* メインコンテンツカード */}
       <div className={`
-        relative border-l-8 ${currentStyle.border} p-6 rounded-r-xl transition-all duration-500
-        ${isSevereOrAbove 
-          ? `${currentStyle.invertedBg} ${currentStyle.invertedText} border-y border-r border-transparent` 
-          : `${currentStyle.bg} border-y border-r border-border/50 shadow-sm`}
-        ${isExtreme ? 'ring-4 ring-purple-500/30' : ''}
+        relative border-l-8 ${currentStyle.border} ${currentStyle.bg} ${currentStyle.text} p-6 rounded-r-xl transition-all duration-500
+        ${isFilled ? 'border-y border-r border-transparent' : 'border-y border-r border-border/50 shadow-sm'}
+        ${isExtreme ? 'ring-2 ring-purple-600/50 ring-offset-2 ring-offset-black' : ''}
       `}>
-        <div className={`flex items-center justify-between mb-4 border-b pb-2 ${isSevereOrAbove ? 'border-white/20' : 'border-border/20'}`}>
+        <div className={`flex items-center justify-between mb-4 border-b pb-2 ${isFilled ? 'border-current/20' : 'border-border/20'}`}>
           <div className="flex items-center gap-3">
-            <span className={`text-4xl font-black ${isSevereOrAbove ? 'text-white' : currentStyle.text}`}>震度 {currentStyle.label}</span>
-            {isExtreme && <AlertTriangle className="text-white" size={32} />}
+            <span className="text-4xl font-black">震度 {currentStyle.label}</span>
           </div>
         </div>
         <div className="space-y-6">
           {Object.entries(data).map(([pref, cities]) => (
             <div key={pref}>
-              <h3 className={`text-lg font-black mb-2 ${isSevereOrAbove ? 'text-white/90' : 'text-main-text opacity-80'}`}>{pref}</h3>
+              <h3 className={`text-lg font-black mb-2 ${isFilled ? 'text-current opacity-90' : 'text-main-text opacity-80'}`}>{pref}</h3>
               <div className="flex flex-wrap gap-x-3 gap-y-2">
                 {cities.map((city) => (
                   <span key={city} className={`
                     text-base font-medium px-3 py-1 rounded-md border shadow-sm
-                    ${isSevereOrAbove 
-                      ? 'bg-white/20 text-white border-white/10' 
+                    ${isFilled 
+                      ? 'bg-current/10 text-current border-current/20 backdrop-blur-sm' 
                       : 'text-main-text opacity-70 bg-background/50 border-border'}
+                    ${isExtreme ? 'font-black tracking-tighter' : ''}
                   `}>{city}</span>
                 ))}
               </div>
