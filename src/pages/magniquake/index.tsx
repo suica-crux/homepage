@@ -25,8 +25,8 @@ const MagniquakePage: React.FC = () => {
         </div>
       ) : data ? (
         <div className="w-full max-w-6xl">
-          <div className="mb-8 border-b pb-4">
-            <Link to="/" className="text-second-light hover:underline text-sm mb-2 block font-medium">
+          <div className="mb-8 border-b border-border pb-4 transition-colors">
+            <Link to="/" className="text-accent hover:underline text-sm mb-2 block font-medium">
               &larr; Vipelarのおもちゃ箱
             </Link>
             <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2">
@@ -36,21 +36,21 @@ const MagniquakePage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start mb-8">
-            <div className="lg:col-span-1 bg-light shadow-sm border border-gray-100 rounded-xl p-5 space-y-6">
-              <h2 className="text-sm font-bold text-second-light uppercase tracking-wider">基本情報</h2>
+            <div className="lg:col-span-1 bg-card-bg border border-border rounded-xl p-5 space-y-6 transition-colors shadow-sm">
+              <h2 className="text-sm font-bold text-accent uppercase tracking-wider">基本情報</h2>
               <Body data={data.Body} />
             </div>
             
-            <div className="lg:col-span-3 bg-light shadow-sm border border-gray-100 rounded-xl p-5">
-              <h2 className="text-sm font-bold text-second-light uppercase tracking-wider mb-4">各地の震度</h2>
+            <div className="lg:col-span-3 bg-card-bg border border-border rounded-xl p-5 transition-colors shadow-sm">
+              <h2 className="text-sm font-bold text-accent uppercase tracking-wider mb-4">各地の震度</h2>
               <IntList data={data} />
             </div>
           </div>
 
-          <div className="text-center py-8 border-t border-gray-100">
+          <div className="text-center py-8 border-t border-border transition-colors">
             <a
               href="https://ntool.online/apidoc/earthquakeapi"
-              className="text-gray-400 hover:text-second-light text-sm inline-flex items-center gap-1 transition-colors"
+              className="text-gray-400 hover:text-accent text-sm inline-flex items-center gap-1 transition-colors"
               target="_blank"
               rel="noreferrer"
             >

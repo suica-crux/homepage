@@ -21,9 +21,9 @@ export function nowJSTTime() {
 // 情報を並べるためのシンプルなボックス
 export function InfoBox({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="flex flex-col gap-1 border-l-2 border-gray-100 pl-3 py-1">
-      <p className="text-sm font-bold text-second-light uppercase tracking-wide">{title}</p>
-      <div className="text-2xl font-bold text-dark">{children}</div>
+    <div className="flex flex-col gap-1 border-l-2 border-border pl-3 py-1 transition-colors">
+      <p className="text-sm font-bold text-accent uppercase tracking-wide">{title}</p>
+      <div className="text-2xl font-bold text-main-text">{children}</div>
     </div>
   );
 }

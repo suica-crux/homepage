@@ -1,6 +1,7 @@
 import { InfoBox, groupByInt, formatDateTime } from './quakeUtil';
 import type { Pref, Head as HeadType, Body as BodyType, Data } from './types';
 import { useEffect, useState } from 'react';
+import { AlertTriangle } from 'lucide-react';
 
 export function IntList({ data }: { data: Data }) {
   const prefs: Pref[] = data.Body.Intensity.Observation.Pref;
@@ -27,7 +28,7 @@ export function IntList({ data }: { data: Data }) {
       </div>
 
       {!showAll && needShowAll && (
-        <div className="mt-12 text-center border-t border-gray-100 pt-8">
+        <div className="mt-12 text-center border-t border-border pt-8 transition-colors">
           <button
             className="inline-flex items-center gap-3 bg-vipelar/10 text-vipelar px-8 py-3 rounded-full hover:bg-vipelar/20 transition-colors font-bold text-base"
             onClick={() => setShowAll(true)}
@@ -42,7 +43,7 @@ export function IntList({ data }: { data: Data }) {
 
 export function Head({ data }: { data: HeadType }) {
   return (
-    <h1 className="text-3xl md:text-5xl font-black text-dark leading-tight tracking-tight">
+    <h1 className="text-3xl md:text-5xl font-black text-main-text leading-tight tracking-tight transition-colors">
       {data.Title}
     </h1>
   );
@@ -68,7 +69,7 @@ export function Body({ data }: { data: BodyType }) {
         <InfoBox title="マグニチュード">{magnitude}</InfoBox>
       </div>
       <InfoBox title="発生日時">{formatDateTime(data.Earthquake.OriginTime)}</InfoBox>
-      <div className="pt-6 mt-6 border-t border-gray-100 italic">
+      <div className="pt-6 mt-6 border-t border-border italic transition-colors opacity-70">
         <InfoBox title="画面更新">{timeStr}</InfoBox>
       </div>
     </div>
@@ -78,40 +79,69 @@ export function Body({ data }: { data: BodyType }) {
 // 内部の関数たち
 function IntBlock({ int, data }: { int: string; data: Record<string, string[]> }) {
   const intensityStyleMap: Record<string, { label: string; bg: string; text: string; border: string }> = {
-    '1': { label: '1', bg: 'bg-sky-50', text: 'text-sky-700', border: 'border-sky-200' },
-    '2': { label: '2', bg: 'bg-lime-50', text: 'text-lime-700', border: 'border-lime-200' },
-    '3': { label: '3', bg: 'bg-yellow-50', text: 'text-yellow-700', border: 'border-yellow-200' },
-    '4': { label: '4', bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200' },
-    '5-': { label: '5弱', bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
-    '5+': { label: '5強', bg: 'bg-red-100', text: 'text-red-800', border: 'border-red-300' },
-    '6-': { label: '6弱', bg: 'bg-fuchsia-50', text: 'text-fuchsia-700', border: 'border-fuchsia-200' },
-    '6+': { label: '6強', bg: 'bg-fuchsia-100', text: 'text-fuchsia-800', border: 'border-fuchsia-300' },
-    '7': { label: '7', bg: 'bg-purple-100', text: 'text-purple-900', border: 'border-purple-300' },
+    '1': { label: '1', bg: 'bg-sky-50 dark:bg-card-bg', text: 'text-sky-700 dark:text-sky-400', border: 'border-sky-200 dark:border-sky-500' },
+    '2': { label: '2', bg: 'bg-lime-50 dark:bg-card-bg', text: 'text-lime-700 dark:text-lime-400', border: 'border-lime-200 dark:border-lime-500' },
+    '3': { label: '3', bg: 'bg-yellow-50 dark:bg-card-bg', text: 'text-yellow-700 dark:text-yellow-400', border: 'border-yellow-200 dark:border-yellow-500' },
+    '4': { label: '4', bg: 'bg-orange-50 dark:bg-card-bg', text: 'text-orange-700 dark:text-orange-400', border: 'border-orange-200 dark:border-orange-500' },
+    '5-': { label: '5弱', bg: 'bg-red-50 dark:bg-card-bg', text: 'text-red-700 dark:text-red-400', border: 'border-red-200 dark:border-red-500' },
+    '5+': { label: '5強', bg: 'bg-red-100 dark:bg-card-bg', text: 'text-red-800 dark:text-red-400', border: 'border-red-300 dark:border-red-600' },
+    '6-': { label: '6弱', bg: 'bg-fuchsia-50 dark:bg-card-bg', text: 'text-fuchsia-700 dark:text-fuchsia-400', border: 'border-fuchsia-200 dark:border-fuchsia-500' },
+    '6+': { label: '6強', bg: 'bg-fuchsia-100 dark:bg-card-bg', text: 'text-fuchsia-800 dark:text-fuchsia-400', border: 'border-fuchsia-300 dark:border-fuchsia-600' },
+    '7': { label: '7', bg: 'bg-purple-100 dark:bg-card-bg', text: 'text-purple-900 dark:text-purple-400', border: 'border-purple-300 dark:border-purple-600' },
   };
 
   const intData = intensityStyleMap[int] ?? {
     label: int,
-    bg: 'bg-gray-50',
-    text: 'text-gray-700',
-    border: 'border-gray-200',
+    bg: 'bg-card-bg',
+    text: 'text-main-text',
+    border: 'border-border',
+  };
+
+  // 震度階級の判定
+  const isNotable = int === '5-' || int === '5+';
+  const isSevere = int === '6-' || int === '6+';
+  const isExtreme = int === '7';
+
+  // 震度に応じたグロー（外光）の設定
+  const glowStyles: Record<string, string> = {
+    '5-': 'shadow-[0_0_15px_-5px_rgba(239,68,68,0.2)] dark:shadow-[0_0_20px_-5px_rgba(239,68,68,0.1)]',
+    '5+': 'shadow-[0_0_20px_-5px_rgba(220,38,38,0.25)] dark:shadow-[0_0_25px_-5px_rgba(220,38,38,0.15)]',
+    '6-': 'shadow-[0_0_25px_-5px_rgba(192,38,211,0.3)] dark:shadow-[0_0_30px_-5px_rgba(192,38,211,0.2)]',
+    '6+': 'shadow-[0_0_30px_-5px_rgba(192,38,211,0.4)] dark:shadow-[0_0_35px_-5px_rgba(192,38,211,0.3)]',
+    '7': 'shadow-[0_0_40px_-5px_rgba(126,34,206,0.5)] dark:shadow-[0_0_50px_-5px_rgba(126,34,206,0.4)]',
   };
 
   return (
-    <div className={`border-l-8 ${intData.border} ${intData.bg} p-6 rounded-r-xl shadow-sm`}>
-      <div className="flex items-center gap-3 mb-4 border-b border-white/50 pb-2">
-        <span className={`text-4xl font-black ${intData.text}`}>震度 {intData.label}</span>
-      </div>
-      <div className="space-y-6">
-        {Object.entries(data).map(([pref, cities]) => (
-          <div key={pref}>
-            <h3 className="text-lg font-black text-gray-700 mb-2">{pref}</h3>
-            <div className="flex flex-wrap gap-x-3 gap-y-2">
-              {cities.map((city) => (
-                <span key={city} className="text-base font-medium text-gray-600 bg-white/60 px-3 py-1 rounded-md border border-gray-100 shadow-sm">{city}</span>
-              ))}
-            </div>
+    <div className="relative">
+      {/* グローレイヤー (Extremeのみ点滅) */}
+      {(isNotable || isSevere || isExtreme) && (
+        <div className={`absolute inset-0 rounded-xl ${glowStyles[int]} ${isExtreme ? 'animate-glow-pulse' : ''} pointer-events-none`} />
+      )}
+      
+      {/* メインコンテンツカード */}
+      <div className={`
+        relative border-l-8 ${intData.border} ${intData.bg} p-6 rounded-r-xl transition-all duration-500
+        ${(isNotable || isSevere || isExtreme) ? 'border-y border-r border-border/50' : 'shadow-sm border-y border-r border-transparent'}
+        ${isExtreme ? 'ring-4 ring-purple-500/30' : ''}
+      `}>
+        <div className="flex items-center justify-between mb-4 border-b border-border/20 pb-2">
+          <div className="flex items-center gap-3">
+            <span className={`text-4xl font-black ${intData.text}`}>震度 {intData.label}</span>
+            {isExtreme && <AlertTriangle className="text-purple-600" size={32} />}
           </div>
-        ))}
+        </div>
+        <div className="space-y-6">
+          {Object.entries(data).map(([pref, cities]) => (
+            <div key={pref}>
+              <h3 className="text-lg font-black text-main-text opacity-80 mb-2">{pref}</h3>
+              <div className="flex flex-wrap gap-x-3 gap-y-2">
+                {cities.map((city) => (
+                  <span key={city} className="text-base font-medium text-main-text opacity-70 bg-background/50 px-3 py-1 rounded-md border border-border shadow-sm">{city}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
