@@ -1,7 +1,8 @@
-import type { ReactNode } from 'react';
 import type { Pref } from './types';
 
-// 日時フォーマット
+/**
+ * 日時を MM/DD HH:mm 形式にフォーマット
+ */
 export function formatDateTime(dateString: string | Date) {
   const date = new Date(dateString);
   const month = date.getMonth() + 1;
@@ -12,32 +13,17 @@ export function formatDateTime(dateString: string | Date) {
   return `${month}/${day} ${hour}:${minute.toString().padStart(2, '0')}`;
 }
 
-// 現在時刻生成
+/**
+ * 日本標準時（JST）の現在時刻を取得
+ */
 export function nowJSTTime() {
   const date = new Date();
   return new Date(date.getTime() + 9 * 60 * 60 * 1000);
 }
 
-// 情報を並べるためのシンプルなボックス
-export function InfoBox({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <div className="flex flex-col gap-1 border-l-2 border-border pl-3 py-1 transition-colors">
-      <p className="text-sm font-bold text-accent uppercase tracking-wide">{title}</p>
-      <div className="text-2xl font-bold text-main-text">{children}</div>
-    </div>
-  );
-}
-
-// 震度リストを表示するためのInfoBox（詳細用）
-export function DetailBox({ children }: { children: ReactNode }) {
-  return (
-    <div className="space-y-4">
-      {children}
-    </div>
-  );
-}
-
-// データ処理
+/**
+ * 震度データを震度階級ごとにグループ化
+ */
 export function groupByInt(prefs: Pref[]) {
   const result: Record<string, Record<string, string[]>> = {};
 

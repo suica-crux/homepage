@@ -49,9 +49,9 @@ export default function Menu({ links }: { links: LinkType[] }) {
       >
         <div className="flex flex-col gap-1">
           {links.map(({ href, label }) => (
-            <Link 
-              key={href} 
-              to={href} 
+            <Link
+              key={href}
+              to={href}
               className="block px-6 py-3 text-lg text-main-text transition-colors"
               onClick={() => setIsOpen(false)}
             >

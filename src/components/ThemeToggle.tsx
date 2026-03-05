@@ -18,10 +18,8 @@ const ThemeToggle: React.FC = () => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     const updateTheme = () => {
-      const isDark = 
-        theme === 'dark' || 
-        (theme === 'system' && mediaQuery.matches);
-      
+      const isDark = theme === 'dark' || (theme === 'system' && mediaQuery.matches);
+
       if (isDark) {
         root.classList.add('dark');
       } else {

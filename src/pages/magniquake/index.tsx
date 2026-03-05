@@ -40,9 +40,11 @@ const MagniquakePage: React.FC = () => {
               <h2 className="text-sm font-bold text-accent uppercase tracking-wider">基本情報</h2>
               <Body data={data.Body} />
             </div>
-            
+
             <div className="lg:col-span-3 bg-card-bg border border-border rounded-xl p-5 transition-colors shadow-sm">
-              <h2 className="text-sm font-bold text-accent uppercase tracking-wider mb-4">各地の震度</h2>
+              <h2 className="text-sm font-bold text-accent uppercase tracking-wider mb-4">
+                各地の震度
+              </h2>
               <IntList data={data} />
             </div>
           </div>
