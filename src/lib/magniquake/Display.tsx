@@ -33,7 +33,7 @@ export function IntList({ data }: { data: Data }) {
             className="inline-flex items-center gap-3 bg-vipelar/10 text-vipelar px-8 py-3 rounded-full hover:bg-vipelar/20 transition-colors font-bold text-base"
             onClick={() => setShowAll(true)}
           >
-            すべての観測地点を表示 ({Object.keys(grouped).length} 階級)
+            すべての観測地点を表示 (計 {Object.keys(grouped).length} 階級)
           </button>
         </div>
       )}

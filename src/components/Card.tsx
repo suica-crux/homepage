@@ -11,8 +11,8 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ title, description, href, img }) => {
   return (
     <div className="w-full md:w-1/3 mb-4 px-2">
-      <Link to={href} className="block">
-        <div className="bg-white shadow rounded-lg overflow-hidden ring-2 ring-transparent transition-all duration-200 ease-in-out hover:ring-vipelar hover:shadow-lg">
+      <Link to={href} className="block group">
+        <div className="bg-card-bg border border-border shadow-sm rounded-xl overflow-hidden transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:scale-[1.02] group-hover:border-accent/50">
           {img ? (
             <img
               src={img}
@@ -22,13 +22,13 @@ const Card: React.FC<CardProps> = ({ title, description, href, img }) => {
               className="w-full h-48 object-cover"
             />
           ) : (
-            <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
-              No Image
+            <div className="w-full h-48 bg-zinc-200 dark:bg-zinc-800 transition-colors duration-300 flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 gap-2">
+              <span className="text-sm font-medium">No Image</span>
             </div>
           )}
-          <div className="p-4">
-            <h5 className="text-lg font-semibold mb-2">{title}</h5>
-            <p className="text-gray-600">{description}</p>
+          <div className="p-6">
+            <h5 className="text-xl font-bold mb-2 text-main-text group-hover:text-accent transition-colors">{title}</h5>
+            <p className="text-main-text opacity-70 line-clamp-3">{description}</p>
           </div>
         </div>
       </Link>

@@ -7,7 +7,7 @@ const HomePage: React.FC = () => {
     <Layout>
       <section className="mb-16 text-center sm:text-left">
         <h1 className="text-4xl sm:text-5xl font-extrabold mb-6 tracking-tight">Vipelarのおもちゃ箱</h1>
-        <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
+        <p className="text-lg text-main-text opacity-70 max-w-2xl leading-relaxed">
           Vipelarは、自分がほしいと思った小規模なWebアプリを作っている、気まぐれ開発室です。
           以下に現在公開中のメインプロジェクトをまとめています。
         </p>
