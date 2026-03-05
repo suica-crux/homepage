@@ -12,7 +12,11 @@
 }
 
 @theme {
-  --color-vipelar: #d396ed;
+  --color-vipelar: #d396ed; /* ブランドカラー */
+  --color-second-light: #0065a3; /* ライトモードのアクセントカラー(各セクションの見出し等) */
+  --color-second-dark: #ade0ee; /* ダークモードのアクセントカラー(各セクションの見出し等) */
+  --color-light: #fafafa; /* ライトモードの背景色、ダークモードの文字色 */
+  --color-dark: #2b2b2b; /* ダークモードの背景色、ライトモードの文字色 */
 }
 
 body {

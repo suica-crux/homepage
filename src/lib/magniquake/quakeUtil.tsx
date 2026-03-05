@@ -4,13 +4,12 @@ import type { Pref } from './types';
 // 日時フォーマット
 export function formatDateTime(dateString: string | Date) {
   const date = new Date(dateString);
-  const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
   const hour = date.getHours();
   const minute = date.getMinutes();
 
-  return `${year}年${month}月${day}日 ${hour}時${minute.toString().padStart(2, '0')}分`;
+  return `${month}/${day} ${hour}:${minute.toString().padStart(2, '0')}`;
 }
 
 // 現在時刻生成
@@ -19,12 +18,21 @@ export function nowJSTTime() {
   return new Date(date.getTime() + 9 * 60 * 60 * 1000);
 }
 
-// Reactコンポーネント
+// 情報を並べるためのシンプルなボックス
 export function InfoBox({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div>
-      <p className="font-semibold">{title}</p>
-      <div className="bg-gray-100 border-gray-300 border-2 p-4 rounded-lg">{children}</div>
+    <div className="flex flex-col gap-1 border-l-2 border-gray-100 pl-3 py-1">
+      <p className="text-sm font-bold text-second-light uppercase tracking-wide">{title}</p>
+      <div className="text-2xl font-bold text-dark">{children}</div>
+    </div>
+  );
+}
+
+// 震度リストを表示するためのInfoBox（詳細用）
+export function DetailBox({ children }: { children: ReactNode }) {
+  return (
+    <div className="space-y-4">
+      {children}
     </div>
   );
 }
