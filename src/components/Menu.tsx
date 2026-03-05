@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { Menu as MenuIcon, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-type Link = {
+type LinkType = {
   href: string;
   label: string;
 };
 
-export default function Menu({ links }: { links: Link[] }) {
+export default function Menu({ links }: { links: LinkType[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -18,20 +19,18 @@ export default function Menu({ links }: { links: Link[] }) {
     };
 
     if (isOpen) {
-      document.addEventListener('click', handleClickOutside);
-    } else {
-      document.removeEventListener('click', handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen]);
 
   return (
-    <>
+    <div className="md:hidden">
       <button
-        className="p-4 -m-2 rounded-md md:hidden"
+        className="p-2 -m-2 rounded-md text-main-text hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
         onClick={(e) => {
           e.stopPropagation();
           setIsOpen(!isOpen);
@@ -42,22 +41,25 @@ export default function Menu({ links }: { links: Link[] }) {
       </button>
       <nav
         ref={menuRef}
-        className={`md:hidden bg-white shadow-md absolute top-16 left-0 w-full py-2 transition-all duration-300 ease-in-out transform ${
+        className={`bg-background dark:bg-card-bg border-b border-border shadow-xl absolute top-16 left-0 w-full py-4 transition-all duration-300 ease-in-out transform z-40 ${
           isOpen
             ? 'opacity-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 -translate-y-4 pointer-events-none'
         }`}
       >
-        {links.map(({ href, label }) => (
-          <a key={href} href={href} className="block px-4 py-2" onClick={() => setIsOpen(false)}>
-            {label}
-          </a>
-        ))}
+        <div className="flex flex-col gap-1">
+          {links.map(({ href, label }) => (
+            <Link
+              key={href}
+              to={href}
+              className="block px-6 py-3 text-lg text-main-text transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
       </nav>
-    </>
+    </div>
   );
-}
-
-export function HeaderDesktop() {
-  return <>{/* for desktop */}</>;
 }
