@@ -11,6 +11,7 @@
   --color-accent: #0065a3;  /* second-light */
   --color-main-text: #2b2b2b; /* dark */
   --color-border: #e5e7eb;  /* gray-200相当 */
+  --color-muted-bg: #f4f4f5; /* zinc-100相当 */
 }
 
 .dark {
@@ -23,6 +24,7 @@
   --color-accent: #ade0ee;  /* second-dark */
   --color-main-text: #fafafa; /* light */
   --color-border: #3f3f46;  /* border-dark相当 */
+  --color-muted-bg: #1f1f22; /* zinc-900相当 */
 }
 
 @theme inline {
@@ -34,6 +36,7 @@
   --color-accent: var(--color-accent);
   --color-main-text: var(--color-main-text);
   --color-border: var(--color-border);
+  --color-muted-bg: var(--color-muted-bg);
 
   /* ご指定の固定色も引き続き使用可能 */
   --color-vipelar: #d396ed;

@@ -30,10 +30,11 @@ export function IntList({ data }: { data: Data }) {
       {!showAll && needShowAll && (
         <div className="mt-12 text-center border-t border-border pt-8 transition-colors">
           <button
-            className="inline-flex items-center gap-3 bg-vipelar/10 text-vipelar px-8 py-3 rounded-full hover:bg-vipelar/20 transition-colors font-bold text-base"
+            className="inline-flex flex-col sm:flex-row items-center gap-1 sm:gap-3 bg-vipelar/10 text-vipelar px-8 py-3 rounded-2xl sm:rounded-full hover:bg-vipelar/20 transition-colors font-bold text-base leading-tight"
             onClick={() => setShowAll(true)}
           >
-            すべての観測地点を表示 (計 {Object.keys(grouped).length} 階級)
+            <span>すべての観測地点を表示</span>
+            <span className="opacity-80 text-sm sm:text-base">({Object.keys(grouped).length} 階級)</span>
           </button>
         </div>
       )}

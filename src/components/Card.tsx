@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({ title, description, href, img }) => {
               className="w-full h-48 object-cover"
             />
           ) : (
-            <div className="w-full h-48 bg-zinc-200 dark:bg-zinc-800 transition-colors duration-300 flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 gap-2">
+            <div className="w-full h-48 bg-muted-bg transition-colors duration-300 flex flex-col items-center justify-center text-main-text opacity-40 gap-2">
               <span className="text-sm font-medium">No Image</span>
             </div>
           )}
