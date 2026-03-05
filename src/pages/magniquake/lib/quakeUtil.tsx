@@ -23,7 +23,7 @@ export function nowJSTTime() {
 export function InfoBox({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div>
-      <p>{title}</p>
+      <p className="font-semibold">{title}</p>
       <div className="bg-gray-100 border-gray-300 border-2 p-4 rounded-lg">{children}</div>
     </div>
   );

@@ -29,7 +29,7 @@ export function IntList({ data }: { data: Data }) {
       {!showAll && needShowAll && (
         <div className="mt-4 text-center">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 content-right"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 content-right font-semibold"
             onClick={() => setShowAll(true)}
           >
             他の地域も表示
@@ -42,7 +42,7 @@ export function IntList({ data }: { data: Data }) {
 
 export function Head({ data }: { data: Head }) {
   return (
-    <h1>
+    <h1 className="font-bold">
       <span className="text-xl">{data.Title}</span>
     </h1>
   );
