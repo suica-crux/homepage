@@ -1,48 +1,50 @@
-# Astro Starter Kit: Basics
+# Vipelarのおもちゃ箱 (Vipelar's Toy Box)
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+Vipelarが「自分がほしい」と思った小規模なWebアプリを制作・公開している、気まぐれ開発室のポータルサイトです。
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 公開中のプロジェクト
 
-## 🚀 Project Structure
+### Magniquake
+気象庁が発表する地震情報（震度速報、震源に関する情報、震源・震度に関する情報、遠地地震に関する情報）を、自分好みのレイアウトで表示するだけのアプリケーションです。
 
-Inside of your Astro project, you'll see the following folders and files:
+## フレームワーク
+
+- **Framework:** [React 19](https://react.dev/)
+- **Build Tool:** [Vite 7](https://vite.dev/)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Routing:** [React Router 7](https://reactrouter.com/)
+- **Language:** [TypeScript 5](https://www.typescriptlang.org/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+
+## 開発用コマンド
+
+プロジェクトのルートディレクトリで以下のコマンドを実行しましょう。
+
+| コマンド | 内容               |
+| :--- |:-----------------|
+| `pnpm install` | 依存関係のインストール      |
+| `pnpm dev` | 開発サーバーの起動        |
+| `pnpm build` | 本番用ビルド           |
+| `pnpm preview` | ビルドしたファイルのプレビュー  |
+| `pnpm lint` | ESLintのコード確認     |
+| `pnpm format` | Prettierによるコード整形 |
+
+## ディレクトリ構造
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── components
-│   │   └── Header.astro
-│   │   └── Footer.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── src/
+│   ├── components/
+│   ├── layouts/
+│   ├── lib/
+│   │   └── magniquake/
+│   ├── pages/
+│   └── styles/
+└── vite.config.ts
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 作者
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-| `pnpm lint`            | Run eslint                                       |
-| `pnpm prettier`        | Run prettier CHECK                               |
-| `pnpm format`          | Run prettier FORMAT                              |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+**Vipelar**
+- GitHub: [@Vipelar](https://github.com/Vipelar)
