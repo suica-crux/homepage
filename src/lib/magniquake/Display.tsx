@@ -5,9 +5,17 @@ import { useState, ReactNode } from 'react';
 /**
  * 地震情報を表示するためのラベル付きボックスコンポーネント
  */
-export function InfoBox({ title, children }: { title: string; children: ReactNode }) {
+export function InfoBox({
+  title,
+  children,
+  borderColor = 'border-border',
+}: {
+  title: string;
+  children: ReactNode;
+  borderColor?: string;
+}) {
   return (
-    <div className="flex flex-col gap-1 border-l-2 border-border pl-3 py-1 transition-colors">
+    <div className={`flex flex-col gap-1 border-l-2 ${borderColor} pl-3 py-1 transition-colors`}>
       <p className="text-sm font-bold text-accent uppercase tracking-wide">{title}</p>
       <div className="text-2xl font-bold text-main-text">{children}</div>
     </div>
@@ -87,10 +95,20 @@ export function Body({ data }: { data: BodyType }) {
   const depth =
     data.Earthquake.Hypocenter.Depth == '0' ? 'ごく浅い' : `${data.Earthquake.Hypocenter.Depth}km`;
   const magnitude = data.Earthquake.Magnitude == 'NaN' ? '不明' : `M${data.Earthquake.Magnitude}`;
+  const maxInt = data.Intensity.Observation.MaxInt;
+
+  // 震度に応じたスタイルを取得
+  const intStyle = getIntStyle(maxInt);
+  // const intensityBorder = intStyle?.border || 'border-border';
 
   return (
     <div className="flex flex-col gap-8">
-      <InfoBox title="震源地">{data.Earthquake.Hypocenter.Name}</InfoBox>
+      <div className="grid grid-cols-2">
+        <InfoBox title="震源地">{data.Earthquake.Hypocenter.Name}</InfoBox>
+        <InfoBox title="最大震度">
+          <span>{intStyle?.label || maxInt}</span>
+        </InfoBox>
+      </div>
       <div className="grid grid-cols-2 gap-6">
         <InfoBox title="深さ">{depth}</InfoBox>
         <InfoBox title="マグニチュード">{magnitude}</InfoBox>
@@ -114,49 +132,7 @@ function IntBlock({ int, data }: { int: string; data: Record<string, string[]> }
   const isFilled = int === '5-' || int === '5+' || int === '6-' || int === '6+' || int === '7';
   const isExtreme = int === '7';
 
-  // 震度ごとの配色定義
-  // 1-4: 淡い色（背景同化）, 5-6: 塗りつぶし（警告）, 7: 特殊演出
-  const intensityStyleMap: Record<
-    string,
-    { label: string; bg: string; text: string; border: string }
-  > = {
-    '1': {
-      label: '1',
-      bg: 'bg-slate-50 dark:bg-card-bg',
-      text: 'text-slate-700 dark:text-sky-400',
-      border: 'border-slate-200 dark:border-sky-600',
-    },
-    '2': {
-      label: '2',
-      bg: 'bg-sky-50 dark:bg-card-bg',
-      text: 'text-sky-700 dark:text-lime-400',
-      border: 'border-sky-100 dark:border-lime-600',
-    },
-    '3': {
-      label: '3',
-      bg: 'bg-blue-50 dark:bg-card-bg',
-      text: 'text-blue-700 dark:text-blue-400',
-      border: 'border-blue-200 dark:border-blue-500',
-    },
-    '4': {
-      label: '4',
-      bg: 'bg-amber-50 dark:bg-card-bg',
-      text: 'text-amber-600 dark:text-amber-300',
-      border: 'border-amber-100 dark:border-amber-400',
-    },
-    '5-': { label: '5弱', bg: 'bg-yellow-600', text: 'text-white', border: 'border-yellow-600' },
-    '5+': { label: '5強', bg: 'bg-orange-600', text: 'text-white', border: 'border-orange-600' },
-    '6-': { label: '6弱', bg: 'bg-red-700', text: 'text-white', border: 'border-red-700' },
-    '6+': { label: '6強', bg: 'bg-rose-800', text: 'text-white', border: 'border-rose-800' },
-    '7': {
-      label: '7',
-      bg: 'bg-gradient-to-br from-purple-950 via-black to-purple-950',
-      text: 'text-white',
-      border: 'border-black',
-    },
-  };
-
-  const currentStyle = intensityStyleMap[int];
+  const currentStyle = getIntStyle(int);
 
   // 外光（グロー）の設定。5弱以上で表示。7は黒と紫の強力なグロー。
   const glowStyles: Record<string, string> = {
@@ -226,4 +202,50 @@ function IntBlock({ int, data }: { int: string; data: Record<string, string[]> }
       </div>
     </div>
   );
+}
+
+function getIntStyle(int: string) {
+  // 震度ごとの配色定義
+  // 1-4: 淡い色（背景同化）, 5-6: 塗りつぶし（警告）, 7: 特殊演出
+  const intensityStyleMap: Record<
+    string,
+    { label: string; bg: string; text: string; border: string }
+  > = {
+    '1': {
+      label: '1',
+      bg: 'bg-slate-50 dark:bg-card-bg',
+      text: 'text-slate-700 dark:text-sky-400',
+      border: 'border-slate-200 dark:border-sky-600',
+    },
+    '2': {
+      label: '2',
+      bg: 'bg-sky-50 dark:bg-card-bg',
+      text: 'text-sky-700 dark:text-lime-400',
+      border: 'border-sky-100 dark:border-lime-600',
+    },
+    '3': {
+      label: '3',
+      bg: 'bg-blue-50 dark:bg-card-bg',
+      text: 'text-blue-700 dark:text-blue-400',
+      border: 'border-blue-200 dark:border-blue-500',
+    },
+    '4': {
+      label: '4',
+      bg: 'bg-amber-50 dark:bg-card-bg',
+      text: 'text-amber-600 dark:text-amber-300',
+      border: 'border-amber-100 dark:border-amber-400',
+    },
+    '5-': { label: '5弱', bg: 'bg-yellow-600', text: 'text-white', border: 'border-yellow-600' },
+    '5+': { label: '5強', bg: 'bg-orange-600', text: 'text-white', border: 'border-orange-600' },
+    '6-': { label: '6弱', bg: 'bg-red-700', text: 'text-white', border: 'border-red-700' },
+    '6+': { label: '6強', bg: 'bg-rose-800', text: 'text-white', border: 'border-rose-800' },
+    '7': {
+      label: '7',
+      bg: 'bg-gradient-to-br from-purple-950 via-black to-purple-950',
+      text: 'text-white',
+      border: 'border-black',
+    },
+  };
+
+  return intensityStyleMap[int];
 }

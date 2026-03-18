@@ -35,13 +35,12 @@ const MagniquakePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start mb-8">
             <div className="lg:col-span-1 bg-card-bg border border-border rounded-xl p-5 space-y-6 transition-colors shadow-sm">
-              <h2 className="text-sm font-bold text-accent uppercase tracking-wider">基本情報</h2>
               <Body data={data.Body} />
             </div>
 
-            <div className="lg:col-span-3 bg-card-bg border border-border rounded-xl p-5 transition-colors shadow-sm">
+            <div className="lg:col-span-2 bg-card-bg border border-border rounded-xl p-5 transition-colors shadow-sm">
               <h2 className="text-sm font-bold text-accent uppercase tracking-wider mb-4">
                 各地の震度
               </h2>
