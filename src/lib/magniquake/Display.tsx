@@ -106,7 +106,7 @@ export function Body({ data }: { data: BodyType }) {
       <div className="grid grid-cols-2">
         <InfoBox title="震源地">{data.Earthquake.Hypocenter.Name}</InfoBox>
         <InfoBox title="最大震度">
-          <span>{intStyle?.label || maxInt}</span>
+          {intStyle?.label || maxInt}
         </InfoBox>
       </div>
       <div className="grid grid-cols-2 gap-6">
