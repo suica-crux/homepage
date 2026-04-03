@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '@/layouts/Layout';
 import { Head, Body, IntList } from '@/lib/magniquake/Display';
-import { GetPostData, GetVXSE51Data } from '@/lib/magniquake/getData';
+import { GetPostData } from '@/lib/magniquake/getData';
 import { ExternalLinkIcon } from 'lucide-react';
 import type { Data } from '@/lib/magniquake/types';
 
@@ -11,8 +11,7 @@ const MagniquakePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // GetPostData().then((res) => {
-    GetVXSE51Data().then((res) => {
+    GetPostData().then((res) => {
       setData(res);
       setLoading(false);
     });
