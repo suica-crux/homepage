@@ -47,7 +47,7 @@ export type Head = {
 };
 
 export type Body = {
-  Earthquake: Earthquake;
+  Earthquake?: Earthquake;
   Intensity: Intensity;
   Comments: Comments;
 };
