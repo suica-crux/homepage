@@ -92,9 +92,21 @@ export function Head({ data }: { data: HeadType }) {
  * 地震の基本情報（震源地、深さ、マグニチュード等）
  */
 export function Body({ data }: { data: BodyType }) {
-  const depth =
-    data.Earthquake.Hypocenter.Depth == '0' ? 'ごく浅い' : `${data.Earthquake.Hypocenter.Depth}km`;
-  const magnitude = data.Earthquake.Magnitude == 'NaN' ? '不明' : `M${data.Earthquake.Magnitude}`;
+  const earthquake = data.Earthquake;
+  const depth = earthquake
+    ? earthquake.Hypocenter.Depth === '0'
+      ? 'ごく浅い'
+      : `${earthquake.Hypocenter.Depth}km`
+    : '---';
+
+  const magnitude = earthquake
+    ? earthquake.Magnitude === 'NaN'
+      ? '不明'
+      : `M${earthquake.Magnitude}`
+    : '---';
+
+  const hypocenterName = earthquake?.Hypocenter.Name || '---';
+
   const maxInt = data.Intensity.Observation.MaxInt;
 
   // 震度に応じたスタイルを取得
@@ -104,17 +116,19 @@ export function Body({ data }: { data: BodyType }) {
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-2 gap-6">
-        <InfoBox title="震源地">{data.Earthquake.Hypocenter.Name}</InfoBox>
+        <InfoBox title="震源地">{hypocenterName}</InfoBox>
         <InfoBox title="最大震度">{intStyle?.label || maxInt}</InfoBox>
       </div>
       <div className="grid grid-cols-2 gap-6">
         <InfoBox title="深さ">{depth}</InfoBox>
         <InfoBox title="マグニチュード">{magnitude}</InfoBox>
       </div>
-      <InfoBox title="発生日時">{formatDateTime(data.Earthquake.OriginTime)}</InfoBox>
+      <InfoBox title="発生日時">
+        {earthquake ? formatDateTime(earthquake.OriginTime) : '---'}
+      </InfoBox>
       <div className="pt-6 mt-6 border-t border-border italic transition-colors opacity-70">
         <div suppressHydrationWarning>
-          <InfoBox title="画面更新">{formatDateTime(new Date())}</InfoBox>
+          <InfoBox title="画面更新">{formatDateTime(new Date().toISOString())}</InfoBox>
         </div>
       </div>
     </div>

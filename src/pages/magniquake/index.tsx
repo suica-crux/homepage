@@ -20,7 +20,7 @@ const MagniquakePage: React.FC = () => {
   return (
     <Layout title="Magniquake">
       {loading ? (
-        <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex items-center justify-center min-h-100">
           <p className="text-lg animate-pulse">データを読み込み中...</p>
         </div>
       ) : data ? (
