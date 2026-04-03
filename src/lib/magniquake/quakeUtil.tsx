@@ -30,8 +30,8 @@ export function groupByInt(prefs: Pref[]) {
   prefs.forEach((pref) => {
     const prefName = pref.Name;
 
-    pref.Area.forEach((area) => {
-      area.City.forEach((city) => {
+    pref.Area?.forEach((area) => {
+      area.City?.forEach((city) => {
         const int = city.MaxInt;
 
         if (!result[int]) result[int] = {};

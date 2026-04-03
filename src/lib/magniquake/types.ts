@@ -8,21 +8,21 @@ export type City = {
   Name: string;
   Code: string;
   MaxInt: string;
-  IntensityStation: IntensityStation[];
+  IntensityStation?: IntensityStation[];
 };
 
 export type Area = {
   Name: string;
   Code: string;
   MaxInt: string;
-  City: City[];
+  City?: City[];
 };
 
 export type Pref = {
   Name: string;
   Code: string;
   MaxInt: string;
-  Area: Area[];
+  Area?: Area[];
 };
 
 // fetch data types
