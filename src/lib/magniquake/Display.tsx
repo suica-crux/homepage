@@ -34,7 +34,7 @@ export function DetailBox({ children }: { children: ReactNode }) {
 ...
  */
 export function IntList({ data }: { data: Data }) {
-  const prefs: Pref[] = data.Body.Intensity.Observation.Pref;
+  const prefs: Pref[] = data.Body.Intensity?.Observation?.Pref || [];
 
   // 震度ごとに都道府県・市区町村をグループ化
   const grouped = groupByInt(prefs);
@@ -107,7 +107,7 @@ export function Body({ data }: { data: BodyType }) {
 
   const hypocenterName = earthquake?.Hypocenter.Name || '---';
 
-  const maxInt = data.Intensity.Observation.MaxInt;
+  const maxInt = data.Intensity?.Observation?.MaxInt || '---';
 
   // 震度に応じたスタイルを取得
   const intStyle = getIntStyle(maxInt);

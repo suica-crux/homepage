@@ -70,7 +70,7 @@ type Hypocenter = {
 };
 
 type Intensity = {
-  Observation: Observation;
+  Observation?: Observation;
 };
 
 type Observation = {
