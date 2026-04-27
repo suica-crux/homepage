@@ -1,4 +1,4 @@
-# Vipelarのおもちゃ箱 (Vipelar's Toy Box)
+# Vipelarのおもちゃ箱
 
 Vipelarが「自分がほしい」と思った小規模なWebアプリを制作・公開している、気まぐれ開発室のポータルサイトです。
 
