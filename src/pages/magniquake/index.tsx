@@ -68,10 +68,7 @@ const MagniquakePage: React.FC = () => {
       ) : (
         <div className="text-center py-20">
           <p className="text-xl text-red-600 dark:text-red-400">データの取得に失敗しました</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-4 text-accent underline"
-          >
+          <button onClick={() => window.location.reload()} className="mt-4 text-accent underline">
             再試行する
           </button>
         </div>
