@@ -1,48 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 
 interface CardProps {
+  index?: number;
   title: string;
   description: string;
   href: string;
-  img?: string;
 }
 
 /**
- * プロジェクト一覧などで使用する汎用カードコンポーネント
- * ホバー時のアニメーションとダークモードに完全対応しています
+ * プロジェクト一覧で使用するエディトリアル風リストアイテム
+ * 番号・タイトル・説明を横並びにし、ホバーでアクセントカラーへ反応します
  */
-const Card: React.FC<CardProps> = ({ title, description, href, img }) => {
+const Card: React.FC<CardProps> = ({ index, title, description, href }) => {
   return (
-    <div className="w-full md:w-1/3 mb-4 px-2">
-      <Link to={href} className="block group">
-        <div className="bg-card-bg border border-border shadow-sm rounded-xl overflow-hidden transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:scale-[1.02] group-hover:border-accent/50">
-          {/* サムネイル画像エリア */}
-          {img ? (
-            <img
-              src={img}
-              alt={`${title}のサムネイル画像`}
-              width={400}
-              height={192}
-              className="w-full h-48 object-cover"
-            />
-          ) : (
-            /* 画像がない場合のプレースホルダー（CSS変数 bg-muted-bg でテーマ連動） */
-            <div className="w-full h-48 bg-muted-bg transition-colors duration-300 flex flex-col items-center justify-center text-main-text opacity-40 gap-2">
-              <span className="text-sm font-medium">No Image</span>
-            </div>
-          )}
-
-          {/* テキストコンテンツエリア */}
-          <div className="p-6">
-            <h5 className="text-xl font-bold mb-2 text-main-text group-hover:text-accent transition-colors">
-              {title}
-            </h5>
-            <p className="text-main-text opacity-70 line-clamp-3">{description}</p>
-          </div>
-        </div>
-      </Link>
-    </div>
+    <Link
+      to={href}
+      className="group flex items-start sm:items-baseline gap-4 sm:gap-8 py-8 border-b border-border transition-colors hover:border-vipelar"
+    >
+      {typeof index === 'number' && (
+        <span className="text-sm font-bold text-main-text opacity-30 tabular-nums pt-1 sm:pt-0">
+          {String(index).padStart(2, '0')}
+        </span>
+      )}
+      <div className="flex-1 min-w-0">
+        <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-main-text group-hover:text-accent transition-colors">
+          {title}
+        </h3>
+        <p className="mt-2 text-main-text opacity-60 leading-relaxed max-w-2xl">{description}</p>
+      </div>
+      <ArrowUpRight
+        className="shrink-0 w-6 h-6 mt-1 text-main-text opacity-30 group-hover:opacity-100 group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
+        aria-hidden="true"
+      />
+    </Link>
   );
 };
 
