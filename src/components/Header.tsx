@@ -11,8 +11,8 @@ const Header: React.FC = () => {
   const links = [{ href: '/magniquake', label: 'Magniquake' }];
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-background dark:bg-card-bg shadow-md z-50 transition-colors border-b border-border/50">
-      <div className="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+    <header className="fixed top-0 left-0 w-full bg-background z-50 transition-colors border-b border-border">
+      <div className="max-w-5xl mx-auto px-6 sm:px-8 flex justify-between items-center h-16">
         {/* ロゴエリア */}
         <div className="flex gap-x-2 items-center">
           <Link

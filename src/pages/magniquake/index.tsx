@@ -24,24 +24,29 @@ const MagniquakePage: React.FC = () => {
           <p className="text-lg animate-pulse">データを読み込み中...</p>
         </div>
       ) : data ? (
-        <div className="w-full max-w-6xl">
-          <div className="mb-8 border-b border-border pb-4 transition-colors">
-            <Link to="/" className="text-accent hover:underline text-sm mb-2 block font-medium">
-              &larr; Vipelarのおもちゃ箱
+        <div className="w-full">
+          <div className="mb-12 border-b border-border pb-6 transition-colors">
+            <Link
+              to="/"
+              className="text-accent hover:underline text-sm mb-4 inline-block font-medium"
+            >
+              &larr; Vipelar's toy box
             </Link>
             <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2">
               <Head data={data.Head} />
-              <p className="text-gray-400 text-sm">Event ID: {data.Head.EventID}</p>
+              <p className="text-main-text opacity-40 text-sm tabular-nums">
+                Event ID: {data.Head.EventID}
+              </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start mb-8">
-            <div className="lg:col-span-1 bg-card-bg border border-border rounded-xl p-5 space-y-6 transition-colors shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16 items-start mb-12">
+            <div className="lg:col-span-1 space-y-6">
               <Body data={data.Body} />
             </div>
 
-            <div className="lg:col-span-2 bg-card-bg border border-border rounded-xl p-5 transition-colors shadow-sm">
-              <h2 className="text-sm font-bold text-accent uppercase tracking-wider mb-4">
+            <div className="lg:col-span-2">
+              <h2 className="text-sm font-bold text-accent uppercase tracking-wider mb-6">
                 各地の震度
               </h2>
               <IntList data={data} />
@@ -51,7 +56,7 @@ const MagniquakePage: React.FC = () => {
           <div className="text-center py-8 border-t border-border transition-colors">
             <a
               href="https://ntool.online/apidoc/earthquakeapi"
-              className="text-gray-400 hover:text-accent text-sm inline-flex items-center gap-1 transition-colors"
+              className="text-main-text opacity-40 hover:text-accent hover:opacity-100 text-sm inline-flex items-center gap-1 transition-colors"
               target="_blank"
               rel="noreferrer"
             >
@@ -62,8 +67,11 @@ const MagniquakePage: React.FC = () => {
         </div>
       ) : (
         <div className="text-center py-20">
-          <p className="text-xl text-red-500">データの取得に失敗しました</p>
-          <button onClick={() => window.location.reload()} className="mt-4 text-blue-500 underline">
+          <p className="text-xl text-red-600 dark:text-red-400">データの取得に失敗しました</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-4 text-accent underline"
+          >
             再試行する
           </button>
         </div>
