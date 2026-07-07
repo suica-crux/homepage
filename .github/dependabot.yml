@@ -15,3 +15,8 @@ updates:
     rebase-strategy: 'auto'
     allow:
       - dependency-type: 'direct'
+    cooldown:
+      default-days: 1 # pnpmのminimumReleaseAgeに合わせる(分→日に変換)
+      semver-major-days: 7
+      semver-minor-days: 2
+      semver-patch-days: 1
