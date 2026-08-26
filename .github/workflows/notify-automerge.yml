@@ -1,0 +1,38 @@
+name: Notify auto-merge queue empty
+
+on:
+  pull_request:
+    types: [closed]
+
+concurrency:
+  group: notify-automerge-done
+  cancel-in-progress: false
+
+jobs:
+  check:
+    if: github.event.pull_request.merged == true && github.event.pull_request.auto_merge != null
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Count remaining auto-merge PRs
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          count=$(gh pr list \
+            --repo ${{ github.repository }} \
+            --state open \
+            --json autoMergeRequest \
+            --jq '[.[] | select(.autoMergeRequest != null)] | length')
+          echo "remaining=$count" >> "$GITHUB_OUTPUT"
+          echo "Remaining auto-merge PRs: $count"
+
+      - name: Notify Discord
+        if: steps.check.outputs.remaining == '0'
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -sS -H "Content-Type: application/json" \
+            -d "{\"content\": \"[${{ github.repository }}] :white_check_mark: No auto-merge PRs waiting\"}" \
+            "$DISCORD_WEBHOOK_URL"
