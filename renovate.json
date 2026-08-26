@@ -1,0 +1,58 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":prHourlyLimitNone"
+  ],
+  "timezone": "Asia/Tokyo",
+  "schedule": ["* 5-6 * * *"],
+  "npmrc": "@vipelar:registry=https://npm.pkg.github.com\n",
+  "prConcurrentLimit": 0,
+  "prCreation": "immediate",
+  "rebaseWhen": "behind-base-branch",
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dependency Dashboard",
+  "minimumReleaseAge": "1 day",
+  "internalChecksFilter": "strict",
+  "packageRules": [
+    {
+      "description": "Route @vipelar/* scope to GitHub Packages",
+      "matchPackageNames": ["@vipelar/**"],
+      "registryUrls": ["https://npm.pkg.github.com"]
+    },
+    {
+      "description": "Major cooldown 7d",
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "7 days"
+    },
+    {
+      "description": "Minor cooldown 2d",
+      "matchUpdateTypes": ["minor"],
+      "minimumReleaseAge": "2 days"
+    },
+    {
+      "description": "Patch cooldown 1d",
+      "matchUpdateTypes": ["patch"],
+      "minimumReleaseAge": "1 day"
+    },
+    {
+      "description": "don't need cooldown for @vipelar/*",
+      "matchPackageNames": ["@vipelar/**"],
+      "minimumReleaseAge": "0 days"
+    },
+    {
+      "description": "typescript-eslint doesn't support typescript v7 yet",
+      "matchPackageNames": ["typescript"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "auto-merge patch updates when CI passes",
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "platformAutomerge": true
+    }
+  ]
+}

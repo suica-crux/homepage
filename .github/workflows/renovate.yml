@@ -1,0 +1,57 @@
+name: Renovate
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '30 20 * * *'
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Renovate log level'
+        default: 'info'
+        type: choice
+        options: [debug, info, warn, error]
+      dryRun:
+        description: 'Dry run mode (empty = disabled)'
+        default: ''
+        type: choice
+        options: ['', 'extract', 'lookup', 'full']
+
+concurrency:
+  group: renovate
+  cancel-in-progress: true
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Generate App installation token
+        id: app-token
+        uses: actions/create-github-app-token@v3.2.0
+        with:
+          client-id: ${{ secrets.RENOVATE_CLIENT_ID }}
+          private-key: ${{ secrets.RENOVATE_APP_PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v46.2.4
+        with:
+          configurationFile: renovate.json
+          token: ${{ steps.app-token.outputs.token }}
+        env:
+          LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
+          RENOVATE_AUTODISCOVER: 'false'
+          RENOVATE_REPOSITORIES: 'suyca-crux/homepage'
+          RENOVATE_PLATFORM: 'github'
+          RENOVATE_ONBOARDING: 'false'
+          RENOVATE_REQUIRE_CONFIG: 'required'
+          RENOVATE_DRY_RUN: ${{ inputs.dryRun }}
+          RENOVATE_HOST_RULES: >-
+            [{"matchHost":"npm.pkg.github.com","hostType":"npm","token":"${{ secrets.VIPELAR_PACKAGES_TOKEN }}"}]
