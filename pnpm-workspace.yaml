@@ -1,0 +1,7 @@
+# ui更新時使用
+#"@vipelar/ui": "workspace:*",
+#packages:
+#  - 'ui'
+
+minimumReleaseAgeExclude:
+  - '@vipelar/*'
