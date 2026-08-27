@@ -38,6 +38,11 @@
       "minimumReleaseAge": "1 day"
     },
     {
+      "description": "In-range lockfile-only updates need the same cooldown as a patch",
+      "matchUpdateTypes": ["lockfileUpdate"],
+      "minimumReleaseAge": "1 day"
+    },
+    {
       "description": "don't need cooldown for @vipelar/*",
       "matchPackageNames": ["@vipelar/**"],
       "minimumReleaseAge": "0 days"
